@@ -6,4 +6,10 @@ app.get("/", (request, response) => {
   response.send("Test integration");
 });
 
-app.listen(PORT, () => console.log(`Sever is running on Port ${PORT}`));
+// Exporte o app sem iniciar o servidor
+module.exports = app;
+
+// Inicie o servidor apenas se o arquivo for executado diretamente
+if (require.main === module) {
+  app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
+}
