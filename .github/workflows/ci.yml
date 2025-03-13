@@ -1,0 +1,33 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main # Executa o pipeline quando houver push na branch main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Executa em um servidor Ubuntu
+
+    steps:
+      # Passo 1: Baixa o código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Passo 2: Configura o Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Versão do Node.js
+
+      # Passo 3: Instala as dependências
+      - name: Install dependencies
+        run: npm install
+
+      # Passo 4: Executa os testes (se houver)
+      - name: Run tests
+        run: npm test
+
+      # Passo 5: Inicia a aplicação (opcional, para verificar se está funcionando)
+      - name: Start server
+        run: npm start &
